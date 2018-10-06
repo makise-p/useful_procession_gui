@@ -7,6 +7,7 @@ String getFileName(){
     public void run() {
       try {
         //ファイル選択画面表示 
+        File dir = new File("======"); // write the imagefile place(path) you want to use
         JFileChooser fc = new JFileChooser(); 
         int returnVal = fc.showOpenDialog(null);
         //「開く」ボタンが押された場合
