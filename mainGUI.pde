@@ -26,7 +26,8 @@ boolean isDrawRect = false;  // 描画中かを識別するフラグ
 DataXML xml = null;
 
 void setup() {
-  size(1900,1000); //13インチのpcの画面いっぱいに広がる
+  size(1900,1000); // windows 13inch pc
+  //size(1400,900); // macOS 13inch pc
   surface.setResizable(true);
   background(255);
   stroke(255,0,0);
@@ -35,19 +36,25 @@ void setup() {
   controlP5 = new ControlP5(this);
   
   imgBtn = controlP5.addButton("LOAD IMAGE");
-  imgBtn.setValue(0).setPosition(1800,40).setSize(70,50);
+  imgBtn.setValue(0).setPosition(1800,40).setSize(70,50); // windows
+  //imgBtn.setValue(0).setPosition(1300,40).setSize(70,50); // macOS
   
   delBtn = controlP5.addButton("DELETE RECT");
-  delBtn.setValue(1).setPosition(1800,500).setSize(70,50);
+  delBtn.setValue(1).setPosition(1800,500).setSize(70,50); // windows
+  //delBtn.setValue(1).setPosition(1300,500).setSize(70,50); // macOS
   
   saveBtn = controlP5.addButton("SAVE RECT");
-  saveBtn.setValue(2).setPosition(1800,300).setSize(70,50);
+  saveBtn.setValue(2).setPosition(1800,300).setSize(70,50); // windows
+  //saveBtn.setValue(2).setPosition(1300,300).setSize(70,50); // macOS
   
   xmlBtn = controlP5.addButton("OUTPUT XML");
-  xmlBtn.setValue(3).setPosition(1800,400).setSize(70,50);
+  xmlBtn.setValue(3).setPosition(1800,400).setSize(70,50); // windows
+  //xmlBtn.setValue(3).setPosition(1300,400).setSize(70,50); // macOS
   
-  radio = controlP5.addRadioButton("radioButton", 1800, 100);  // Position
+  radio = controlP5.addRadioButton("radioButton", 1800, 100);  // windows
+  //radio = controlP5.addRadioButton("radioButton", 1300, 100); // macOS
   radio.setSize(30, 30).setColorLabel(color(0));
+  //欲しいラベルの個数まで増やす
   radio.addItem(index2name[0], 1);
   //radio.addItem(index2name[1], 2);
   //radio.addItem(index2name[2], 3);
@@ -82,8 +89,8 @@ void draw() {
       //  surface.setSize(img.width, img.height); // 画像サイズにresize
       //}
       println("successful to load!");
-      xml = new DataXML(nowFile.substring(nowFile.lastIndexOf('\\') + 1), img.width, img.height);      // for windows
-      //xml = new DataXML(nowFile.substring(nowFile.lastIndexOf('/') + 1), img.width, img.height);        for macOS
+      xml = new DataXML(nowFile.substring(nowFile.lastIndexOf('\\') + 1), img.width, img.height);  // for windows
+      //xml = new DataXML(nowFile.substring(nowFile.lastIndexOf('/') + 1), img.width, img.height);  // for macOS
     }else{
       println("Your selected file path is worng.");
     }
@@ -103,7 +110,9 @@ void draw() {
 }
 
 void mousePressed(){
-  if (mouseX > 1800){ //マウスの反応範囲を決定
+  //マウスの反応範囲を決定
+  if (mouseX > 1800){ // windows 
+  //if (mouseX > 1300){ // macOS
     return;
   }
   
@@ -166,7 +175,7 @@ void controlEvent(ControlEvent theEvent) {
       //String imgFileName = nowFile.substring(nowFile.lastIndexOf('/') + 1);
       //String imgName = imgFileName.substring(0, imgFileName.lastIndexOf('.'));
       //xml.saveNewXML(imgName + ".xml");
-      replaceFile = ("~~ここに絶対パス~~");      // I want to save at here
+      replaceFile = ("=====");      // I want to save at here
       String replaceFileName = nowFile.substring(nowFile.lastIndexOf("\\") + 1);                 // ~\\sample_image\\6.jpg → 6.jpg
       //String replaceFileName = nowFile.substring(nowFile.lastIndexOf("/") + 1);                // for macOS
 	  String replaceName = replaceFileName.substring(0, replaceFileName.lastIndexOf('.'));       // 6.jpg → 6
